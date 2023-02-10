@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -33,6 +33,15 @@ public class EnemyController : MonoBehaviour
             // if the player is not within range, reset the moveDirection to 0 so that the enemy does not keep moving
             moveDirection = Vector3.zero;
             animator.SetBool("isMoving", false);
+        }
+
+        if (moveDirection != Vector3.zero) {
+            // if the skeleton is moving, turn the it in the direction of the player
+            if (transform.position.x < PlayerController.instance.transform.position.x) {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            } else {
+                transform.localScale = Vector3.one;
+            }
         }
 
         moveDirection.Normalize();
