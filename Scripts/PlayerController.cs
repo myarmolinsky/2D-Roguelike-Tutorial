@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletToFire;
     public Transform firePoint;
 
+    // how long should we wait between spawning a bullet
+    public float timeBetweenShots;
+    // how long has passed since the last bullet spawned
+    private float shotCounter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
         moveInput.Normalize();
 
+        // Time.deltaTime is the time since the last frame in seconds
+        // Ex. if player is running 60 FPS, time.deltaTime would be ~1/60, if they were running 30 FPS, it would be ~1/30, etc.
         // transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
     
         // Move rigid body by multiplying each property of moveInput by moveSpeed
@@ -59,12 +66,23 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
-        // when the mouse button is held down
+        // when the mouse button is clicked
         // the left mouse button is 0, right mouse button is 1, middle mouse button is 2
         if (Input.GetMouseButtonDown(0)) {
             // when we want to spawn an object in Unity, we use `Instantiate`
             // this needs the item you are spawning, where to spawn it, and which rotation it should have
             Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+            shotCounter = timeBetweenShots;
+        }
+
+        // when the mouse button is being held down
+        if (Input.GetMouseButton(0)) {
+            shotCounter -= Time.deltaTime;
+            if (shotCounter <= 0) {
+                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+
+                shotCounter = timeBetweenShots;
+            }
         }
 
         // set moving so that we know when to play the idle and moving animations

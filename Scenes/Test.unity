@@ -264,6 +264,7 @@ MonoBehaviour:
   animator: {fileID: 321248365}
   bulletToFire: {fileID: 1452754099289810764, guid: bf25fd091441ab5438745305c1f69565, type: 3}
   firePoint: {fileID: 612819105}
+  timeBetweenShots: 0.2
 --- !u!58 &321248363
 CircleCollider2D:
   m_ObjectHideFlags: 0
