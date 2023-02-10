@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public GameObject bulletToFire;
+    public Transform firePoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,9 +59,20 @@ public class PlayerController : MonoBehaviour
         float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
+        // when the mouse button is held down
+        // the left mouse button is 0, right mouse button is 1, middle mouse button is 2
+        if (Input.GetMouseButtonDown(0)) {
+            // when we want to spawn an object in Unity, we use `Instantiate`
+            // this needs the item you are spawning, where to spawn it, and which rotation it should have
+            Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+        }
+
+        // set moving so that we know when to play the idle and moving animations
         if (moveInput != Vector2.zero) {
+            // for moving animation
             animator.SetBool("isMoving", true);
         } else {
+            // for idle animation
             animator.SetBool("isMoving", false);
         }
     }
