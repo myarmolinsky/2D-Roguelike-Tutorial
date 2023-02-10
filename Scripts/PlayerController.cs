@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // static is not visible as a changable variable in unity despite being public
+    // it is set for all versions of the PlayerController throughout the game
+    public static PlayerController instance;
+
     public float moveSpeed;
     private Vector2 moveInput;
 
@@ -22,6 +26,13 @@ public class PlayerController : MonoBehaviour
     public float timeBetweenShots;
     // how long has passed since the last bullet spawned
     private float shotCounter;
+
+    // Awake takes place before the Start function, and when you deactivate and reactivate an object
+    private void Awake() {
+        // set the current player character instance to this script
+        // there can only be one instance at a time, so there can only be one player a time
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +62,13 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenPoint = cam.WorldToScreenPoint(transform.localPosition);
 
+        // if the mouse is left of player, point the player and gun left
         if (mousePosition.x < screenPoint.x) {
             // we add an 'f' so that Unity knows we're giving it a float value instead of an int value
             transform.localScale = new Vector3(-1f, 1f, 1f);
             gunArm.localScale = new Vector3(-1f, -1f, 1f);
         } else {
+            // if the mouse is right of player, point the player and gun right
             // `Vector3.one` is a shortcut way of writing `new Vector3(1f, 1f, 1f)`
             transform.localScale = Vector3.one;
             gunArm.localScale = Vector3.one;
