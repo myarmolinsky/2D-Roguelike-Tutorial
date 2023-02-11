@@ -42,6 +42,8 @@ public class PlayerHealthController : MonoBehaviour
         // so if we were to destroy it instead of deactivate it, we would probably get errors in those places
         if (currentHealth <= 0) {
             PlayerController.instance.gameObject.SetActive(false);
+
+            UIController.instance.deathScreen.SetActive(true);
         }
     }
 }
