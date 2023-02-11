@@ -25,10 +25,11 @@ public class PlayerBullet : MonoBehaviour
 
     // When the bullet hits something
     private void OnTriggerEnter2D(Collider2D other) {
-        // this if statement is to prevent bullets from colliding with each others
-        if (other.tag != "PlayerBullet" && other.tag != "Enemy") {
+        // Only show the impact effect if the bullet collides with something other than the enemy
+        // because the enemy has its own hurt effect
+        if (other.tag != "Enemy") {
             Instantiate(impactEffect, transform.position, transform.rotation);
-        } else if (other.tag == "Enemy") {    
+        } else if (other.tag == "Enemy") {
             other.GetComponent<EnemyController>().DamageEnemy(damage);
         }
 

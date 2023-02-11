@@ -19,6 +19,14 @@ public class EnemyController : MonoBehaviour
 
     public Animator animator;
 
+    public bool shouldShoot;
+    public GameObject bullet;
+    public Transform firePoint;
+    public float fireRate;
+    private float fireCounter;
+    public float shootRange;
+    
+    public SpriteRenderer body;
 
     // Start is called before the first frame update
     void Start()
@@ -29,28 +37,40 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Vector3.Distance gets the distance between 2 points
-        // we can access the PlayerController instance because it is public static
-        if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer) {
-            moveDirection = PlayerController.instance.transform.position - transform.position;
-            animator.SetBool("isMoving", true);
-        } else {
-            // if the player is not within range, reset the moveDirection to 0 so that the enemy does not keep moving
-            moveDirection = Vector3.zero;
-            animator.SetBool("isMoving", false);
-        }
-
-        if (moveDirection != Vector3.zero) {
-            // if the skeleton is moving, turn the it in the direction of the player
-            if (transform.position.x < PlayerController.instance.transform.position.x) {
-                transform.localScale = new Vector3(-1f, 1f, 1f);
+        if (body.isVisible) {
+            // Vector3.Distance gets the distance between 2 points
+            // we can access the PlayerController instance because it is public static
+            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChasePlayer) {
+                moveDirection = PlayerController.instance.transform.position - transform.position;
+                animator.SetBool("isMoving", true);
             } else {
-                transform.localScale = Vector3.one;
+                // if the player is not within range, reset the moveDirection to 0 so that the enemy does not keep moving
+                moveDirection = Vector3.zero;
+                animator.SetBool("isMoving", false);
+            }
+
+            moveDirection.Normalize();
+            rb.velocity = moveDirection * moveSpeed;
+
+            if (moveDirection != Vector3.zero) {
+                // if the skeleton is moving, turn the it in the direction of the player
+                if (transform.position.x < PlayerController.instance.transform.position.x) {
+                    transform.localScale = new Vector3(-1f, 1f, 1f);
+                } else {
+                    transform.localScale = Vector3.one;
+                }
+            }
+
+            // only shoot if this enemy should shoot and if it is in the given range of the player
+            if (shouldShoot && Vector3.Distance(PlayerController.instance.transform.position, transform.position) < shootRange) {
+                fireCounter -= Time.deltaTime;
+
+                if (fireCounter <= 0) {
+                    fireCounter = fireRate;
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                }
             }
         }
-
-        moveDirection.Normalize();
-        rb.velocity = moveDirection * moveSpeed;
     }
 
     // this is the function we'll call when we want to damage the enemy
