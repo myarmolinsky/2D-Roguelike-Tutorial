@@ -9,6 +9,8 @@ public class PlayerBullet : MonoBehaviour
 
     public GameObject impactEffect;
 
+    public int damage = 50;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,11 @@ public class PlayerBullet : MonoBehaviour
         Instantiate(impactEffect, transform.position, transform.rotation);
         // destroy the gameObject that this script is attached to
         Destroy(gameObject);
+
+        // On the `other` component that our bullet has collided with, get our EnemyController script
+        if (other.tag == "Enemy") {    
+            other.GetComponent<EnemyController>().DamageEnemy(damage);
+        }
     }
 
     // when the bullet leaves the screen

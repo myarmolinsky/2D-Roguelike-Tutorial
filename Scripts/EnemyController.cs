@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     // the direction the player is in relative to the enemy
     private Vector3 moveDirection;
 
+    public int health = 150;
+
     public Animator animator;
 
 
@@ -46,5 +48,15 @@ public class EnemyController : MonoBehaviour
 
         moveDirection.Normalize();
         rb.velocity = moveDirection * moveSpeed;
+    }
+
+    // this is the function we'll call when we want to damage the enemy
+    public void DamageEnemy(int damage) {
+        health -= damage;
+
+        // if the enemy is out of health, it is dead, destroy it
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
     }
 }

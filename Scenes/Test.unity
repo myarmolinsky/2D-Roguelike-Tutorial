@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 321248365}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 1687763728}
   m_Layer: 0
   m_Name: Enemy - Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -788,6 +788,7 @@ MonoBehaviour:
   rb: {fileID: 1687763726}
   moveSpeed: 3
   rangeToChasePlayer: 7
+  health: 150
   animator: {fileID: 1687763728}
 --- !u!95 &1687763728
 Animator:
