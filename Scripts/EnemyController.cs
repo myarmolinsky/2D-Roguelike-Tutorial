@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     public int health = 150;
 
     public GameObject[] deathSplatters;
+    public GameObject hitEffect;
 
     public Animator animator;
 
@@ -54,6 +55,7 @@ public class EnemyController : MonoBehaviour
 
     // this is the function we'll call when we want to damage the enemy
     public void DamageEnemy(int damage) {
+        Instantiate(hitEffect, transform.position, transform.rotation);
         health -= damage;
 
         // if the enemy is out of health, it is dead, destroy it

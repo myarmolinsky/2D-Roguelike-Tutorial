@@ -205,6 +205,7 @@ MonoBehaviour:
   - {fileID: 7819729873896324156, guid: 61dd873487c8cd846a48090cde60695c, type: 3}
   - {fileID: 6686140039829790441, guid: 4f09252d61ba9824baa3774cc29a444e, type: 3}
   - {fileID: 7406471121679494926, guid: a0fa71490af28fc4c91fe1bc3ae3810c, type: 3}
+  hitEffect: {fileID: 3076681032793302172, guid: e51a8ca6bc2331c42a09b2f6ca977c68, type: 3}
   animator: {fileID: 104558126}
 --- !u!61 &104558129
 BoxCollider2D:
@@ -644,6 +645,7 @@ MonoBehaviour:
   - {fileID: 7819729873896324156, guid: 61dd873487c8cd846a48090cde60695c, type: 3}
   - {fileID: 6686140039829790441, guid: 4f09252d61ba9824baa3774cc29a444e, type: 3}
   - {fileID: 7406471121679494926, guid: a0fa71490af28fc4c91fe1bc3ae3810c, type: 3}
+  hitEffect: {fileID: 3076681032793302172, guid: e51a8ca6bc2331c42a09b2f6ca977c68, type: 3}
   animator: {fileID: 956051299}
 --- !u!61 &956051302
 BoxCollider2D:
@@ -1212,6 +1214,7 @@ MonoBehaviour:
   - {fileID: 7819729873896324156, guid: 61dd873487c8cd846a48090cde60695c, type: 3}
   - {fileID: 6686140039829790441, guid: 4f09252d61ba9824baa3774cc29a444e, type: 3}
   - {fileID: 7406471121679494926, guid: a0fa71490af28fc4c91fe1bc3ae3810c, type: 3}
+  hitEffect: {fileID: 3076681032793302172, guid: e51a8ca6bc2331c42a09b2f6ca977c68, type: 3}
   animator: {fileID: 1687763728}
 --- !u!95 &1687763728
 Animator:
@@ -1567,6 +1570,7 @@ MonoBehaviour:
   - {fileID: 7819729873896324156, guid: 61dd873487c8cd846a48090cde60695c, type: 3}
   - {fileID: 6686140039829790441, guid: 4f09252d61ba9824baa3774cc29a444e, type: 3}
   - {fileID: 7406471121679494926, guid: a0fa71490af28fc4c91fe1bc3ae3810c, type: 3}
+  hitEffect: {fileID: 3076681032793302172, guid: e51a8ca6bc2331c42a09b2f6ca977c68, type: 3}
   animator: {fileID: 2073939388}
 --- !u!61 &2073939391
 BoxCollider2D:
@@ -1692,6 +1696,7 @@ MonoBehaviour:
   - {fileID: 7819729873896324156, guid: 61dd873487c8cd846a48090cde60695c, type: 3}
   - {fileID: 6686140039829790441, guid: 4f09252d61ba9824baa3774cc29a444e, type: 3}
   - {fileID: 7406471121679494926, guid: a0fa71490af28fc4c91fe1bc3ae3810c, type: 3}
+  hitEffect: {fileID: 3076681032793302172, guid: e51a8ca6bc2331c42a09b2f6ca977c68, type: 3}
   animator: {fileID: 2087514176}
 --- !u!61 &2087514179
 BoxCollider2D:
