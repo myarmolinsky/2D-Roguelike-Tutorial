@@ -24,7 +24,7 @@ public class EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
-
+            PlayerHealthController.instance.DamagePlayer();
         }
 
         Destroy(gameObject);
