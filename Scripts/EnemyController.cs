@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
 
     public int health = 150;
 
+    public GameObject[] deathSplatters;
+
     public Animator animator;
 
 
@@ -57,6 +59,9 @@ public class EnemyController : MonoBehaviour
         // if the enemy is out of health, it is dead, destroy it
         if (health <= 0) {
             Destroy(gameObject);
+            int selectedSplatter = Random.Range(0, deathSplatters.Length);
+            int splatterRotation = Random.Range(0, 4);
+            Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, 90f * splatterRotation));
         }
     }
 }

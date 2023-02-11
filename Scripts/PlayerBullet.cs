@@ -25,9 +25,12 @@ public class PlayerBullet : MonoBehaviour
 
     // When the bullet hits something
     private void OnTriggerEnter2D(Collider2D other) {
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        // destroy the gameObject that this script is attached to
-        Destroy(gameObject);
+        // this if statement is to prevent bullets from colliding with each others
+        if (other.tag != "PlayerBullet") {
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            // destroy the gameObject that this script is attached to
+            Destroy(gameObject);
+        }
 
         // On the `other` component that our bullet has collided with, get our EnemyController script
         if (other.tag == "Enemy") {    
