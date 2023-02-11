@@ -17,6 +17,10 @@ public class PlayerHealthController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
+        UIController.instance.healthSlider.maxValue = maxHealth;
+        UIController.instance.healthSlider.value = currentHealth;
+        UIController.instance.healthText.text = currentHealth + " / " + maxHealth;
     }
 
     // Update is called once per frame
@@ -26,7 +30,11 @@ public class PlayerHealthController : MonoBehaviour
     }
 
     public void DamagePlayer() {
-        currentHealth--; 
+        currentHealth--;
+
+        UIController.instance.healthSlider.value = currentHealth;
+        UIController.instance.healthText.text = currentHealth + " / " + maxHealth;
+        
         // if the health drops to or below 0, deactivate the player
         // the player is an important object that we will likely reference in other places,
         // so if we were to destroy it instead of deactivate it, we would probably get errors in those places
