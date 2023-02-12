@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 5
+  invincibilityLength: 1
 --- !u!4 &13411055
 Transform:
   m_ObjectHideFlags: 0
@@ -743,6 +744,7 @@ MonoBehaviour:
   bulletToFire: {fileID: 1452754099289810764, guid: bf25fd091441ab5438745305c1f69565, type: 3}
   firePoint: {fileID: 612819105}
   timeBetweenShots: 0.2
+  body: {fileID: 2007831962}
 --- !u!58 &321248363
 CircleCollider2D:
   m_ObjectHideFlags: 0

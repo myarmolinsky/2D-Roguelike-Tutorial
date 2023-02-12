@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float timeBetweenShots;
     // how long has passed since the last bullet spawned
     private float shotCounter;
+    public SpriteRenderer body;
 
     // Awake takes place before the Start function, and when you deactivate and reactivate an object
     private void Awake() {

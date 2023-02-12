@@ -9,6 +9,9 @@ public class PlayerHealthController : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
 
+    public float invincibilityLength = 1f;
+    private float invincibilityCounter;
+
     private void Awake() {
         instance = this;
     }
@@ -26,24 +29,33 @@ public class PlayerHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (invincibilityCounter > 0) {
+            invincibilityCounter -= Time.deltaTime;
+
+            if (invincibilityCounter <= 0) {
+                PlayerController.instance.body.color = new Color(PlayerController.instance.body.color.r, PlayerController.instance.body.color.g, PlayerController.instance.body.color.b, 1f);
+            }
+        }
     }
 
     public void DamagePlayer() {
-        if (currentHealth > 0) {
+        if (invincibilityCounter <= 0) {
             currentHealth--;
-        }
+            invincibilityCounter = invincibilityLength;
 
-        UIController.instance.healthSlider.value = currentHealth;
-        UIController.instance.healthText.text = currentHealth + " / " + maxHealth;
+            PlayerController.instance.body.color = new Color(PlayerController.instance.body.color.r, PlayerController.instance.body.color.g, PlayerController.instance.body.color.b, 0.5f);
 
-        // if the health drops to or below 0, deactivate the player
-        // the player is an important object that we will likely reference in other places,
-        // so if we were to destroy it instead of deactivate it, we would probably get errors in those places
-        if (currentHealth <= 0) {
-            PlayerController.instance.gameObject.SetActive(false);
+            UIController.instance.healthSlider.value = currentHealth;
+            UIController.instance.healthText.text = currentHealth + " / " + maxHealth;
 
-            UIController.instance.deathScreen.SetActive(true);
+            // if the health drops to or below 0, deactivate the player
+            // the player is an important object that we will likely reference in other places,
+            // so if we were to destroy it instead of deactivate it, we would probably get errors in those places
+            if (currentHealth <= 0) {
+                PlayerController.instance.gameObject.SetActive(false);
+
+                UIController.instance.deathScreen.SetActive(true);
+            }
         }
     }
 }
