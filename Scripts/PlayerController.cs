@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     private float shotCounter;
     public SpriteRenderer body;
 
+    private float activeMoveSpeed;
+    public float dashSpeed = 8f, dashLength = 0.5f, dashCooldown = 1f, dashInvincibility = 0.5f;
+    private float dashLengthCounter, dashCooldownCounter;
+
     // Awake takes place before the Start function, and when you deactivate and reactivate an object
     private void Awake() {
         // set the current player character instance to this script
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
         // object in the hierarchy for the tag `Main Camera`. This is why it's best to do this at
         // the start of a level
         cam = Camera.main;
+
+        activeMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -58,7 +64,7 @@ public class PlayerController : MonoBehaviour
         // transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
     
         // Move rigid body by multiplying each property of moveInput by moveSpeed
-        rb.velocity = moveInput * moveSpeed;
+        rb.velocity = moveInput * activeMoveSpeed;
 
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenPoint = cam.WorldToScreenPoint(transform.localPosition);
@@ -97,6 +103,24 @@ public class PlayerController : MonoBehaviour
 
                 shotCounter = timeBetweenShots;
             }
+        }
+
+        // when the player presses the spacebar, active the dash
+        if (Input.GetKeyDown(KeyCode.Space) && dashCooldownCounter <= 0 && dashLengthCounter <= 0) {
+            activeMoveSpeed = dashSpeed;
+            dashLengthCounter = dashLength;
+        }
+
+        if (dashLengthCounter > 0) {
+            dashLengthCounter -= Time.deltaTime;
+            if (dashLengthCounter <= 0) {
+                activeMoveSpeed = moveSpeed;
+                dashCooldownCounter = dashCooldown;
+            }
+        }
+
+        if (dashCooldown > 0) {
+            dashCooldownCounter -= Time.deltaTime;
         }
 
         // set moving so that we know when to play the idle and moving animations
