@@ -109,6 +109,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && dashCooldownCounter <= 0 && dashLengthCounter <= 0) {
             activeMoveSpeed = dashSpeed;
             dashLengthCounter = dashLength;
+
+            animator.SetTrigger("dash");
         }
 
         if (dashLengthCounter > 0) {
